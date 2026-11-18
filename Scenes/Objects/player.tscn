@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://dh1aido2ag4kf"]
+
+[ext_resource type="Script" uid="uid://cevypyow2wi83" path="res://Scripts/player.gd" id="1_dfgsd"]
+[ext_resource type="Texture2D" uid="uid://b6rsd6tfyrbjv" path="res://Assets/player.png" id="2_kvv6r"]
+
+[sub_resource type="Gradient" id="Gradient_kvv6r"]
+offsets = PackedFloat32Array(0.56766915, 0.7406015)
+colors = PackedColorArray(0.7002463, 0.38322267, 1.92523e-07, 0.6313726, 0.12882987, 0.12882978, 0.12882975, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nrax6"]
+gradient = SubResource("Gradient_kvv6r")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+metadata/_snap_count = 25
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nrax6"]
+radius = 245.20384
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_nrax6"]
+polygon = PackedVector2Array(-10, -14.999998, 59.999985, 174.99998, 274.99997, 269.99997, 474.99994, 144.99998, 534.99994, -9.999999, 444.99994, -194.99998, 259.99997, -264.99997, 74.999985, -189.99998)
+
+[node name="Player" type="Area2D" unique_id=1274184147]
+top_level = true
+scale = Vector2(0.2, 0.2)
+script = ExtResource("1_dfgsd")
+projectile_speed = 1600.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1206709549]
+position = Vector2(-5, 0)
+scale = Vector2(1.0006804, 0.9613635)
+texture = ExtResource("2_kvv6r")
+
+[node name="circle" type="Sprite2D" parent="." unique_id=572976304]
+position = Vector2(-5.0000005, 0)
+scale = Vector2(9.53125, 9.0625)
+texture = SubResource("GradientTexture2D_nrax6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=337778531]
+position = Vector2(-4.999878, -1.5258789e-05)
+shape = SubResource("CircleShape2D_nrax6")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=750796209]
+position = Vector2(-269.99997, 0)
+occluder = SubResource("OccluderPolygon2D_nrax6")

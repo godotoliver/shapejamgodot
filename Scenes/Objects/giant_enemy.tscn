@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://qa5o1gklquo6"]
+
+[ext_resource type="Script" uid="uid://dixbxcolho1fo" path="res://Scripts/enemy.gd" id="1_6td88"]
+[ext_resource type="Texture2D" uid="uid://c81rim7e44a6y" path="res://Assets/big_enemy.png" id="2_q2m6k"]
+
+[node name="Giant Enemy" type="Area2D" unique_id=1446958132]
+script = ExtResource("1_6td88")
+speed = 150.0
+health = 60
+point_value = 1000
+hazard_speed = 2200.0
+attack_cooldown = 0.5
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1330906776]
+position = Vector2(2.3841858e-07, -1)
+rotation = -1.5732206
+scale = Vector2(1.7024292, 1.7794118)
+texture = ExtResource("2_q2m6k")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=442068779]
+position = Vector2(2.3841858e-07, -1)
+rotation = -1.5732206
+scale = Vector2(1.7024292, 1.7794118)
+polygon = PackedVector2Array(32.5, -34, -5.5, -34, -12.699997, -32, -18.599998, -32, -52.800003, -23, -57.6, -23, -103.8, -11, -108.7, -11, -112.7, -9, -116.1, -9, -117.1, -7, -118.5, -7, -118.5, -3.5, -115.5, -1.5, -115.5, -0.20000076, -109.6, 1, -104.7, 1, -97.5, 2.7999992, -97.5, 3.7999992, -80.5, 6.799999, -80.5, 7.799999, -74.6, 9, -69.7, 9, -58.5, 11.799999, -58.5, 13, -52.699997, 13, -17.599998, 22, -10.699997, 22, 20.399994, 30, 27, 30, 29, 27, 30.199997, 27, 35.5, 14.200001, 61.600006, 10, 70.7, 10, 76.5, 8, 80.899994, 8, 86.899994, 2, 88.5, 2, 88.5, 0, 89.2, 0, 90.5, -3.7999992, 90.5, -6.3999996, 88.5, -8.4, 88.5, -11.4, 83.5, -16.4, 83.5, -18, 80.5, -18, 80.5, -18.9, 40.600006, -24, 35.199997, -24, 32.5, -31.2)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

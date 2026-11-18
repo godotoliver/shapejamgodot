@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://v8sfejoh6vvv"]
+
+[ext_resource type="Script" uid="uid://chbe22rjnjqtd" path="res://Scripts/projectile.gd" id="1_dbwyx"]
+[ext_resource type="Texture2D" uid="uid://bp3apfm3qrngm" path="res://Assets/playershot.png" id="2_jobfh"]
+
+[node name="Projectile" type="Area2D" unique_id=1086516268 groups=["Projectile"]]
+script = ExtResource("1_dbwyx")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=521627890]
+rotation = 1.5711772
+texture = ExtResource("2_jobfh")
+offset = Vector2(0, -30)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1028390483]
+position = Vector2(30, 0)
+rotation = 1.5711772
+polygon = PackedVector2Array(10, -8.200001, 10, -34.7, 1.6000004, -37.5, -5, -37.5, -5, -35.7, -10, -30.7, -10, -2.9000015, -4, 31, -4, 37.5, 1.8000002, 37.5)

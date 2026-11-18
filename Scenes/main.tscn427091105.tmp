@@ -1,0 +1,184 @@
+[gd_scene load_steps=14 format=3 uid="uid://b420jd6ybrul7"]
+
+[ext_resource type="PackedScene" uid="uid://dh1aido2ag4kf" path="res://Scenes/Objects/player.tscn" id="1_ynf5e"]
+[ext_resource type="Script" uid="uid://dh2w4tce8gtfh" path="res://Scripts/powerup_spawner.gd" id="2_hptm8"]
+[ext_resource type="PackedScene" uid="uid://cuxfena303qsm" path="res://Scenes/Objects/powerup.tscn" id="3_d1ilt"]
+[ext_resource type="Script" uid="uid://d1h7a3o4mnxka" path="res://Scripts/enemy_spawner.gd" id="4_6iyac"]
+[ext_resource type="PackedScene" uid="uid://bfwaxp7qxjjk8" path="res://Scenes/Objects/enemy.tscn" id="5_fdnlq"]
+[ext_resource type="Texture2D" uid="uid://bdgerow8hmxuq" path="res://Assets/Textures/background_texture.tres" id="6_344ge"]
+[ext_resource type="Script" uid="uid://10cqwhuwl4r1" path="res://Scripts/destroy_out_of_bounds.gd" id="7_ynf5e"]
+[ext_resource type="Script" uid="uid://6metesh55n1c" path="res://Scripts/UI_manager.gd" id="8_k12tt"]
+[ext_resource type="FontFile" uid="uid://ccck25vsduay8" path="res://Assets/Fonts/PressStart2P.ttf" id="9_h1bgf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d31q8"]
+size = Vector2(1200, 900)
+
+[sub_resource type="LabelSettings" id="LabelSettings_dm2qe"]
+font = ExtResource("9_h1bgf")
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_saai4"]
+font = ExtResource("9_h1bgf")
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_nl3m6"]
+font = ExtResource("9_h1bgf")
+
+[node name="Main" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 324)
+
+[node name="Player" parent="." instance=ExtResource("1_ynf5e")]
+position = Vector2(576, 574)
+projectile_speed = 400.0
+
+[node name="Enemy Spawner" type="Node2D" parent="."]
+position = Vector2(576, -100)
+script = ExtResource("4_6iyac")
+enemy_scene = ExtResource("5_fdnlq")
+spawn_cooldown = 5.0
+
+[node name="Waypoints" type="Node2D" parent="Enemy Spawner"]
+position = Vector2(0, 400)
+
+[node name="Waypoint 1" type="Node2D" parent="Enemy Spawner/Waypoints"]
+position = Vector2(-502, -250)
+
+[node name="Waypoint 2" type="Node2D" parent="Enemy Spawner/Waypoints"]
+position = Vector2(500, -250)
+
+[node name="Waypoint 3" type="Node2D" parent="Enemy Spawner/Waypoints"]
+position = Vector2(0, -150)
+
+[node name="Waypoint 4" type="Node2D" parent="Enemy Spawner/Waypoints"]
+position = Vector2(-500, -50)
+
+[node name="Waypoint 5" type="Node2D" parent="Enemy Spawner/Waypoints"]
+position = Vector2(500, -50)
+
+[node name="Powerup Spawner" type="Node2D" parent="."]
+position = Vector2(576, -100)
+script = ExtResource("2_hptm8")
+powerup_scene = ExtResource("3_d1ilt")
+powerup_speed = 200.0
+spawn_cooldown = 3.0
+
+[node name="Environment" type="Node2D" parent="."]
+
+[node name="Star Particles" type="CPUParticles2D" parent="Environment"]
+position = Vector2(576, -100)
+amount = 40
+lifetime = 10.0
+emission_shape = 3
+emission_rect_extents = Vector2(576, 0)
+direction = Vector2(0, 1)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 80.0
+initial_velocity_max = 150.0
+scale_amount_max = 4.0
+
+[node name="Background" type="Sprite2D" parent="Environment"]
+z_index = -999
+z_as_relative = false
+position = Vector2(576, 324)
+scale = Vector2(1500, 1500)
+texture = ExtResource("6_344ge")
+
+[node name="Game Space" type="Area2D" parent="Environment"]
+light_mask = 0
+position = Vector2(576, 324)
+script = ExtResource("7_ynf5e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Game Space"]
+shape = SubResource("RectangleShape2D_d31q8")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Canvas" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("8_k12tt")
+
+[node name="LevelLabel" type="Label" parent="CanvasLayer/Canvas"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 168.0
+offset_bottom = 36.0
+text = "Hello World!"
+label_settings = SubResource("LabelSettings_dm2qe")
+
+[node name="HPLabel" type="Label" parent="CanvasLayer/Canvas"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 36.0
+offset_right = 168.0
+offset_bottom = 48.0
+text = "Hello World!"
+label_settings = SubResource("LabelSettings_dm2qe")
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer/Canvas"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 48.0
+offset_right = 168.0
+offset_bottom = 60.0
+text = "Hello World!"
+label_settings = SubResource("LabelSettings_dm2qe")
+
+[node name="GameOverUI" type="Control" parent="CanvasLayer/Canvas"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameOverLabel" type="Label" parent="CanvasLayer/Canvas/GameOverUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -182.5
+offset_top = -12.5
+offset_right = 182.5
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "GAME OVER!"
+label_settings = SubResource("LabelSettings_saai4")
+horizontal_alignment = 1
+
+[node name="Restart Label" type="Label" parent="CanvasLayer/Canvas/GameOverUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -182.0
+offset_top = 29.0
+offset_right = 183.0
+offset_bottom = 54.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press R to restart"
+label_settings = SubResource("LabelSettings_nl3m6")
+horizontal_alignment = 1
+
+[connection signal="area_exited" from="Environment/Game Space" to="Environment/Game Space" method="_on_game_space_area_exited"]

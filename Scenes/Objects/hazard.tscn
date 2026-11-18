@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://daey55hf1x0nw"]
+
+[ext_resource type="Script" uid="uid://chbe22rjnjqtd" path="res://Scripts/projectile.gd" id="1_xuipq"]
+[ext_resource type="Texture2D" uid="uid://c7hh7pybbtyx2" path="res://Assets/enemyshot.png" id="2_35l37"]
+
+[node name="Hazard" type="Area2D" unique_id=1275078991 groups=["Hazard"]]
+script = ExtResource("1_xuipq")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=389981878]
+rotation = 1.5707964
+texture = ExtResource("2_35l37")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1886471553]
+rotation = 1.5707964
+polygon = PackedVector2Array(10, -8.200001, 10, -34.7, 1.6000004, -37.5, -5, -37.5, -5, -35.7, -10, -30.7, -10, -2.9000015, -4, 31, -4, 37.5, 1.8000002, 37.5)
